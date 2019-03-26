@@ -295,6 +295,7 @@ func resourceNodeV1Read(d *schema.ResourceData, meta interface{}) error {
 	d.Set("storage_interface", node.StorageInterface)
 	d.Set("vendor_interface", node.VendorInterface)
 	d.Set("provision_state", node.ProvisionState)
+	d.Set("properties", node.Properties)
 	d.Set("target_provision_state", node.TargetProvisionState)
 
 	return nil
@@ -318,6 +319,7 @@ func resourceNodeV1Update(d *schema.ResourceData, meta interface{}) error {
 		"network_interface",
 		"owner",
 		"power_interface",
+		"properties",
 		"raid_interface",
 		"rescue_interface",
 		"resource_class",
@@ -377,6 +379,7 @@ func schemaToCreateOpts(d *schema.ResourceData) *nodes.CreateOpts {
 		NetworkInterface:    d.Get("network_interface").(string),
 		Owner:               d.Get("owner").(string),
 		PowerInterface:      d.Get("power_interface").(string),
+		Properties:          d.Get("properties").(map[string]interface{}),
 		RAIDInterface:       d.Get("raid_interface").(string),
 		RescueInterface:     d.Get("rescue_interface").(string),
 		ResourceClass:       d.Get("resource_class").(string),
